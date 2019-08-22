@@ -10,8 +10,9 @@ def get_image():
     html = response.content
     soup = BeautifulSoup(html, 'html.parser')
     main_div = soup.find(id="mainpage-potd")
-    img = main_div.find("img").get("src")
-    return img
+    attrs = main_div.find("img").attrs
+    srcset = attrs['srcset']
+    return srcset.split(' ')[0]
 
 
 def download_image(image_url):
